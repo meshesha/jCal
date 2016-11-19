@@ -1,3 +1,3 @@
-# jCal - Jewish calendar jQuery plugin
+# jCal - Jewish event calendar - jQuery plugin
 
 soon...
