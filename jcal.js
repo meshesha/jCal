@@ -1,9 +1,8 @@
 /*
-Based on Monthly 2.1.0 by Kevin Thornbloom that licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
-but without datepiker function.
-change the method of back from event list view to month view. 
-added day and week event detail view method.
-and more...
+@author: Tadele Meshesha
+@creationDate: 06/12/2016
+@authorEmail: meshesha1@gmail.com
+@license: GPL2
 */ 
 (function($) {
 	$.fn.extend({
