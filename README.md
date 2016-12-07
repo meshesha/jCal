@@ -10,6 +10,9 @@
 - Basic views or jQuery-ui theme.
 - and more...
 
+##Usage
+go to <a href="https://github.com/meshesha/jCal/wiki">jcal wiki</a>.
+
 ##Changelog
 
 v.1.0.0 - Launched
