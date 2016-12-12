@@ -1,6 +1,7 @@
 /*
 @author: Tadele Meshesha
 @creationDate: 06/12/2016
+@version: 1.0.1
 @authorEmail: meshesha1@gmail.com
 @license: GPL2
 */ 
@@ -91,7 +92,22 @@
 				id_suffix = divId;
 			}
 			//alert("id_suffix="+id_suffix);
-			///////////////////////////////////
+			////////////cheke direction//////////////////
+			function getDirection(elem) {
+				var dir;
+				if (window.getComputedStyle) { // all browsers
+					dir = window.getComputedStyle(elem, null).getPropertyValue('direction');
+				} else {
+					dir = elem.currentStyle.direction; // IE5-8
+				}
+				return dir;
+			} 
+			var inputDir = getDirection($(this)[0]);
+			//alert(inputDir)
+			if (inputDir=="rtl"){
+				$('#'+divId).attr("dir","ltr");
+			} 			
+			///////////////////////////////////////////
 			if (options.maxWidth != false){
 				$('#'+divId).css('maxWidth',options.maxWidth);
 			}
@@ -196,22 +212,7 @@
 											'</div>').append('<div class="jcal-event-list" id="jcal-event-list_'+id_suffix+'" dir="rtl"></div>');
 				}				
 			}
-			if(options.cal=='gre'){
-				//set months names for title
-				if(options.lang=='en'){
-					if (Number(elmWidth)<250){
-						monthNames = monthNames_en;
-					}else{
-						monthNames = fullMonthNames_en; 
-					}
-				}else if(options.lang=='he'){
-					if (Number(elmWidth)<250){
-						monthNames = monthNames_he; 
-					}else{
-						monthNames = fullMonthNames_he; 
-					}
-				}
-			}
+
 			if(options.cal=='jewish'){
 				var currentJd = new Date(Number(currentYear),Number(currentMonth)-1,Number(currentDay));
 				var jdateObject = new GregToHeb(currentJd);//d
@@ -233,6 +234,22 @@
 			function setJcalMonth(m, y){
 				//if the new month and year equal to current month and year
 				//then remove "To day" button.
+				if(options.cal=='gre'){
+					//set months names for title
+					if(options.lang=='en'){
+						if (Number(elmWidth)<250){
+							monthNames = monthNames_en;
+						}else{
+							monthNames = fullMonthNames_en; 
+						}
+					}else if(options.lang=='he'){
+						if (Number(elmWidth)<250){
+							monthNames = monthNames_he; 
+						}else{
+							monthNames = fullMonthNames_he; 
+						}
+					}
+				}
 				if (m == currentMonth && y == currentYear){
 					$('#'+divId+' .jcal-reset').remove();
 					$('#'+divId+' .jcal-today-button').addClass('jcal-state-default jcal-state-disabled').attr('disabled','disabled');
@@ -1146,11 +1163,8 @@
 					$('#' + divId+' .jcal-event-list').show();
 					$('#' + divId+' .jcal-event-list').css('transform');
 					$('#' + divId+' .jcal-event-list').css('transform','scale(1)');
-					if(options.lang=='en'){
-						$('#' + divId+' .item-has-event').show();
-					}else if(options.lang=='he'){
-						$('#' + divId+' .item-has-event').show();
-					}
+					$('#' + divId+' .item-has-event').show();
+
 					$('#'+divId+' .jcal-list-button').addClass('jcal-state-default jcal-state-disabled').attr('disabled','disabled');
 					$('#'+divId+' .jcal-month-button').removeClass('jcal-state-default jcal-state-disabled').removeAttr('disabled');
 
@@ -1169,12 +1183,15 @@
 						$('#' + divId+' .jcal-event-list').show();
 						$('#' + divId+' .jcal-event-list').css('transform');
 						$('#' + divId+' .jcal-event-list').css('transform','scale(1)');
+						
+						var title_month = "";
 						if(options.lang=='en'){
-							$('#' + divId+' .item-has-event').show();
+							title_month = "Month view";
 						}else if(options.lang=='he'){
-							$('#' + divId+' .item-has-event').show();
+							title_month = "תצוגת חודש";
 						}
-						$('#'+divId+' .jcal-list-month').addClass('jcal-icon-month').removeClass('jcal-icon-list').attr("title","Month view");	
+						$('#' + divId+' .item-has-event').show();						
+						$('#'+divId+' .jcal-list-month').addClass('jcal-icon-month').removeClass('jcal-icon-list').attr("title",title_month);	
 						
 					}else{ //listMode
 						viewMode = 'monthMode';
@@ -1182,7 +1199,13 @@
 						setTimeout(function(){
 							$('#' + divId+' .jcal-event-list').hide();
 						}, 250);
-						$('#'+divId+' .jcal-list-month').addClass('jcal-icon-list').removeClass('jcal-icon-month').attr("title","List view");
+						var title_list = "";
+						if(options.lang=='en'){
+							title_list = "List view";
+						}else if(options.lang=='he'){
+							title_list = "תצוגת רשימה";
+						}						
+						$('#'+divId+' .jcal-list-month').addClass('jcal-icon-list').removeClass('jcal-icon-month').attr("title",title_list);
 						//show left and right buttons
 						$('#'+divId+' .jcal-right').show();
 						$('#'+divId+' .jcal-left').show();						
