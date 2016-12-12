@@ -19,7 +19,7 @@ go to <a href="https://github.com/meshesha/jCal/wiki">jcal wiki</a>.
 <li>fixed issue <a href="https://github.com/meshesha/jCal/issues/2">#2</a>.</li>
 <li>fixed issue <a href="https://github.com/meshesha/jCal/issues/2">#3</a>.</li>
 <li>fixed issue <a href="https://github.com/meshesha/jCal/issues/2">#4</a>.</li>
-<ul>
+</ul>
 ####v.1.0.0 - Launched
 
 
