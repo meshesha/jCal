@@ -14,13 +14,11 @@
 go to <a href="https://github.com/meshesha/jCal/wiki">jcal wiki</a>.
 
 ##Changelog
-v.1.0.1:
+####v.1.0.1:
 <ul>
 <li>fixed issue #2.</li>
 <li>fixed issue #3.</li>
 <li>fixed issue #4.</li>
 <ul>
-<br>
-
-v.1.0.0 - Launched
+####v.1.0.0 - Launched
 
