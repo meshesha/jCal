@@ -1,0 +1,659 @@
+/* 
+@author: Tadele Meshesha
+@creationDate: 06/12/2016
+@version: 1.0.0
+@authorEmail: meshesha1@gmail.com
+@license: GPL2
+
+Toolbar
+--------------------------------------------------------------------------------------------------*/
+
+.jcal-toolbar {
+	text-align: center;
+	margin-bottom: 1em;
+}
+
+.jcal-toolbar .jcal-left {
+	float: left;
+}
+
+.jcal-toolbar .jcal-right {
+	float: right;
+}
+
+.jcal-toolbar .jcal-center {
+	display: inline-block;
+}
+
+/* the things within each left/right/center section */
+.jcal-toolbar > * > * { /* extra precedence to override button border margins */
+	float: left;
+	margin-left: .75em;
+}
+
+/* the first thing within each left/center/right section */
+.jcal-toolbar > * > :first-child { /* extra precedence to override button border margins */
+	margin-left: 0;
+}
+	
+/* title text */
+
+.jcal-toolbar h2 {
+	margin: 0;
+}
+
+/* button layering (for border precedence) */
+
+.jcal-toolbar button {
+	position: relative;
+}
+
+.jcal-toolbar .jcal-state-hover,
+.jcal-toolbar .ui-state-hover {
+	z-index: 2;
+}
+	
+.jcal-toolbar .jcal-state-down {
+	z-index: 3;
+}
+
+.jcal-toolbar .jcal-state-active,
+.jcal-toolbar .ui-state-active {
+	z-index: 4;
+}
+
+.jcal-toolbar button:focus {
+	z-index: 5;
+}
+/* Overall wrapper */
+.jcal {
+	background: #F3F3F5;
+	color:#545454;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	position: relative;
+}
+
+/* Top bar containing title, navigation, and buttons */
+.jcal-header {
+	position: relative;
+	text-align:center;
+	padding:10px;
+	background: #fff;
+	height: 40px;
+	box-sizing: border-box;
+}
+/* Center area of top bar containing title and buttons */
+.jcal-header-title {
+	font-size:.8em;
+	/*text-transform: uppercase;*/
+}
+
+/*
+.jcal-toolbar .jcal-header-title-date{
+	display: inline-block;
+	border: 0px;
+	text-decoration: none;
+	font-weight: bold;
+	font-size: 1.2em;
+	height: 25px;
+	padding: 1px 10px 0 10px;
+	transition:background .1s;
+	background: #fff;	
+}*/
+.jcal-toolbar-title-date{
+	padding: 1px 10px 0 10px;
+}
+/*________________________________________________*/
+.jcal-header-title{
+	display: inline-block;
+}
+
+/*
+every button that is not first in a button group should scootch over one pixel and cover the
+previous button's border...
+*/
+
+.jcal-header-title > * { /* extra precedence b/c buttons have margin set to zero */
+	float: left;
+	margin: 0 0 0 -1px;
+}
+
+.jcal-header-title > :first-child { /* same */
+	margin-left: 0;
+}
+/*________________________________________________*/
+
+/* Buttons*/
+/* Buttons (styled <button> tags, normalized to work cross-browser)
+--------------------------------------------------------------------------------------------------*/
+
+.jcal-button {
+	/* force height to include the border and padding */
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+
+	/* dimensions */
+	margin: 0;
+	height: 2.1em;
+	padding: 0 .6em;
+
+	/* text & cursor */
+	font-size: 1em; /* normalize */
+	white-space: nowrap;
+	cursor: pointer;
+}
+
+/* Firefox has an annoying inner border */
+.jcal-button::-moz-focus-inner { margin: 0; padding: 0; }
+	
+.jcal-state-default { /* non-theme */
+	border: 1px solid;
+}
+
+.jcal-state-default.jcal-corner-left { /* non-theme */
+	border-top-left-radius: 4px;
+	border-bottom-left-radius: 4px;
+}
+
+.jcal-state-default.jcal-corner-right { /* non-theme */
+	border-top-right-radius: 4px;
+	border-bottom-right-radius: 4px;
+}
+.jcal-state-default {
+	background-color: #f5f5f5;
+	background-image: -moz-linear-gradient(top, #ffffff, #e6e6e6);
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#e6e6e6));
+	background-image: -webkit-linear-gradient(top, #ffffff, #e6e6e6);
+	background-image: -o-linear-gradient(top, #ffffff, #e6e6e6);
+	background-image: linear-gradient(to bottom, #ffffff, #e6e6e6);
+	background-repeat: repeat-x;
+	border-color: #e6e6e6 #e6e6e6 #bfbfbf;
+	border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+	color: #333;
+	text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.jcal-state-disabled {
+	cursor: default;
+	background-image: none;
+	opacity: 0.65;
+	box-shadow: none;
+}
+/* icons in buttons */
+
+.jcal-button .jcal-icon { /* non-theme */
+	position: relative;
+	top: -0.05em; /* seems to be a good adjustment across browsers */
+	margin: 0 .2em;
+	vertical-align: middle;
+}
+/* Buttons Groups
+--------------------------------------------------------------------------------------------------*/
+
+.jcal-button-group {
+	display: inline-block;
+}
+
+/*
+every button that is not first in a button group should scootch over one pixel and cover the
+previous button's border...
+*/
+
+.jcal-button-group > * { /* extra precedence b/c buttons have margin set to zero */
+	float: left;
+	margin: 0 0 0 -1px;
+}
+
+.jcal-button-group > :first-child { /* same */
+	margin-left: 0;
+}
+/*_________________________________________________________________*/
+/* Icons (inline elements with styled text that mock arrow icons)
+--------------------------------------------------------------------------------------------------*/
+
+.jcal-icon {
+	display: inline-block;
+	height: 1em;
+	line-height: 1em;
+	font-size: 0.8em;
+	text-align: center;
+	overflow: hidden;
+	font-family: "Courier New", Courier, monospace;
+
+	/* don't allow browser text-selection */
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+/*
+Acceptable font-family overrides for individual icons:
+	"Arial", sans-serif
+	"Times New Roman", serif
+
+NOTE: use percentage font sizes or else old IE chokes
+*/
+
+.jcal-icon:after {
+	position: relative;
+}
+
+.jcal-icon-left-single-arrow:after {
+	content: "\02039";
+	font-weight: bold;
+	font-size: 200%;
+	top: -7%;
+}
+
+.jcal-icon-right-single-arrow:after {
+	content: "\0203A";
+	font-weight: bold;
+	font-size: 200%;
+	top: -7%;
+}
+
+.jcal-icon-left-double-arrow:after {
+	content: "\000AB";
+	font-size: 160%;
+	top: -7%;
+}
+
+.jcal-icon-right-double-arrow:after {
+	content: "\000BB";
+	font-size: 160%;
+	top: -7%;
+}
+
+.jcal-icon-left-triangle:after {
+	content: "\25C4";
+	font-size: 125%;
+	top: 3%;
+}
+
+.jcal-icon-right-triangle:after {
+	content: "\25BA";
+	font-size: 125%;
+	top: 3%;
+}
+
+.jcal-icon-down-triangle:after {
+	content: "\25BC";
+	font-size: 125%;
+	
+}
+.jcal-icon-month:after {
+	content: "\2610";  /*266F*/
+	font-size: 125%;	
+}
+.jcal-icon-list:after {
+	content: "\2261";
+	font-size: 125%;	
+}
+.jcal-icon-x:after {
+	content: "\000D7";
+	font-size: 200%;
+	top: 6%;
+}
+/* Buttons for reverting to "today", and closing event list */
+.jcal-reset{
+	cursor: pointer;
+	border: 1px solid #ccc;
+	color: #545454;
+	text-decoration: none;
+	font-size: 95%;
+	background: #eee;
+	border-top-left-radius:4px;
+	border-bottom-left-radius:4px;	
+	border-top-right-radius:4px;
+	border-bottom-right-radius:4px;	
+}
+.jcal-list-month{
+	cursor: pointer;
+	border: 1px solid #ccc;
+	color: #545454;
+	text-decoration: none;
+	font-size: 95%;
+	box-sizing: border-box;
+	padding: 0 .6em;
+	background: #eee;
+	border-top-left-radius:4px;
+	border-bottom-left-radius:4px;	
+	border-top-right-radius:4px;
+	border-bottom-right-radius:4px;	
+}
+.jcal-reset:hover ,
+.jcal-list-month:hover{
+	background: #00BFFF;
+	border:1px solid #00BFFF;
+	color:#fff;
+}
+
+.jcal-prev {
+	/* force height to include the border and padding */
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;	
+	cursor: pointer;
+	/* dimensions */
+	margin: 0;
+	height: 2.1em;
+	padding: 0;
+	opacity: .5;
+}
+
+.jcal-prev-next{
+	cursor: none;
+}
+.jcal-prev.jcal-prev:hover {
+	opacity: 1;
+}
+
+/* wrapper for right button to make the clickable area bigger */
+
+.jcal-next {
+	/* force height to include the border and padding */
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;	
+	cursor: pointer;
+	/* dimensions */
+	margin: 0;
+	height: 2.1em;
+	padding: 0;	
+	cursor: pointer;
+	opacity: .5;
+}
+.jcal-next.jcal-next:hover {
+	opacity: 1;
+}
+
+/* Day of the week headings */
+.jcal-day-title-wrap {
+	display:table;
+	table-layout:fixed;
+	width:100%;
+	background: #fff;
+	border-bottom: 1px solid #EBEBEB;
+}
+.jcal-day-title-wrap div {
+	width: 14.28%!important;
+	display:table-cell;
+	box-sizing:border-box;
+	position: relative;
+	/*font-weight: bold;*/
+	text-align:center;
+	text-transform: uppercase;
+	font-size:70%;
+}
+
+/* Calendar days wrapper */
+.jcal-day-wrap {
+	display:table;
+	table-layout:fixed;
+	width:100%;
+	overflow: hidden;
+}
+.jcal-week {
+	display:table-row;
+	width:100%;
+}
+/* Calendar Days */
+.jcal-day, .jcal-day-blank {
+	width: 14.28%!important;
+	display:table-cell;
+	vertical-align: top;
+	box-sizing:border-box;
+	position: relative;
+	font-weight: bold;
+	color:inherit;
+	background: #fff;
+	box-shadow: 0 0 0 1px #EBEBEB;
+	-webkit-transition: .25s;
+	transition:.25s;
+	padding:0;
+	text-decoration: none;
+}
+
+/* Trick to make the days' width equal their height */
+.jcal-day:before {
+	content: "";
+	display: block;
+	padding-top: 100%;
+	float: left;
+}
+
+/* Hover effect for non event calendar days */
+.jcal-day-wrap > a:hover {
+	background: #A1C2E3;
+}
+
+/* Days that are part of previous or next month */
+.jcal-day-blank {
+	background:#F3F3F5;
+}
+
+/* Event calendar day number styles */
+.jcal-day-event > .jcal-day-number {
+	position: absolute;
+	line-height: 1em;
+	top:2px;
+	left:2px;
+	font-size:8px;
+}
+
+/* Current day style */
+.jcal-today .jcal-day-number {
+	color: #FFF;
+	background: #EA6565;
+	border-radius: 20px;
+	top: 1px;
+	left: 1px;
+	font-size: 8px;
+	width: 18px;
+	height: 18px;
+	line-height: 18px;
+	text-align: center;
+}
+
+
+/* Wrapper around events */
+.jcal-indicator-wrap {
+	position: relative;
+	text-align: center;
+	line-height: 0;
+	max-width: 20px;
+	margin:0 auto;
+	padding-top:40%;
+}
+.jcal-more-events{
+	color: #3385ff;
+	/*background: #FFF;*/
+	border-radius: 20px;
+	top: 1px;
+	left: 1px;
+	font-size: 8px;
+	/*width: 18px;
+	height: 18px;
+	line-height: 18px;
+	text-align: center;	*/
+}
+/* Event indicator dots */
+.jcal-day .jcal-event-indicator {
+	display: inline-block;
+	margin: 1px;
+	width: 8px;
+	height: 8px;
+	border-radius: 6px;
+	vertical-align: middle;
+	border-radius: 6px;
+	background:#7BA7CE;
+	font-size:0;
+	color:transparent;
+}
+
+.jcal-day .jcal-more-events:hover {
+	cursor: pointer;
+	text-decoration: underline;
+}
+.jcal-day .jcal-event-indicator:hover {
+	cursor: pointer;
+}
+/* Listing of events under calendar */
+.jcal-event-list {
+	background: #fff; /*rgba(233, 235, 236, 0.9);*/
+	overflow: auto;
+	position: absolute;
+	top: 42px;
+	width: 100%;
+	height: calc(100% - 42px);
+	display: none;
+	font-size:10px;
+	-webkit-transition: .25s;
+	-webkit-transform:scale(0);
+		-ms-transform:scale(0);
+	        transform:scale(0);
+}
+
+/* Days in Events List */
+.jcal-list-item {
+	position: relative;
+	padding:10px 10px 5px 60px;
+	display: none;
+	border-top: 1px solid #D6D6D6;
+	text-align: left;
+}
+.jcal-list-item-rtl { 
+	position: relative;
+	padding:10px 50px 5px 10px; /*V*/
+	display: none;
+	border-top: 1px solid #D6D6D6;
+	text-align: right; /*V*/
+}
+.jcal-list-item:after{
+    content:'No Events';
+    padding:4px 10px;
+    display:block;
+    margin-bottom:5px;
+ }
+
+.jcal-event-list .jcal-today .jcal-event-list-date {
+	color: #EA6565;
+}
+.jcal-event-list .jcal-today .jcal-event-list-date-rtl {
+	color: #EA6565;
+}
+/* Events in Events List */
+.jcal-event-list .listed-event {
+	display: block;
+	color:#7BA7CE;
+	padding:4px 10px;
+	border-radius:2px;
+	margin-bottom: 5px;
+}
+
+.jcal-list-item a:link, .jcal-list-item a:visited {
+	text-decoration: none;
+}
+
+.item-has-event {
+	display: block;
+}
+
+.item-has-event:after{
+    display:none!important;
+}
+
+.jcal-event-list-date {
+	width:50px;
+	position: absolute;
+	left:0;          
+	top:13px;
+	text-align: center;
+	font-size: 10px;
+    font-weight: bold;
+    line-height: 1.2em;
+}
+.jcal-event-list-date-rtl { 
+	width:50px;
+	position: absolute;
+	right:0;        
+	top:13px;
+	text-align: center;
+	font-size: 10px;
+    font-weight: bold;
+    line-height: 1.2em;
+}
+.jcal-list-time-start,
+.jcal-list-time-end {
+	font-size:.7em;
+	display: inline-block;
+}
+.jcal-list-time-end:not(:empty):before {
+	content:'-';
+	padding:0 2px;
+}
+
+/* Events List custom webkit scrollbar */
+
+.jcal-event-list::-webkit-scrollbar {width: 9px;}
+
+/* Track */
+.jcal-event-list::-webkit-scrollbar-track {background: none;}
+
+/* Handle */
+.jcal-event-list::-webkit-scrollbar-thumb {
+	background:#ccc;
+	border:1px solid #E9EBEC;
+	border-radius: 10px;
+}
+.jcal-event-list::-webkit-scrollbar-thumb:hover {background:#555;}
+
+/* Increase font & spacing over larger size */
+@media (min-width: 400px) {
+	.jcal-day-number {
+		top: 5px;
+		left: 5px;
+		font-size: 10px;
+	}	
+}
+/* Styles for large mode where text is revealed within events */
+@media (min-width: 600px) {
+	.jcal-day-event {
+		padding-top: 20px;
+	}
+	.jcal-day-event:before {
+		padding-top: 77%;
+	}
+	.jcal-day-event > .jcal-indicator-wrap {
+		width:auto;
+		max-width: none;
+	}
+	.jcal-indicator-wrap {
+		padding:0;
+	}
+	.jcal-day .jcal-event-indicator {
+		display: block;
+		margin: 0 0 1px 0;
+		width: auto;
+		height:20px;
+		font-size: 8px;
+		padding: 4px;
+		border-radius:0;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		color:#fff;
+		text-shadow:0 0 2px rgba(0,0,0,.2);
+		text-decoration: none;
+		line-height: 1em;
+		white-space: nowrap;
+		box-sizing: border-box;
+	}
+}
