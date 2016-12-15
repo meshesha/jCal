@@ -19,7 +19,7 @@ go to <a href="https://github.com/meshesha/jCal/wiki">jcal wiki</a>.
 ####v.1.1.0
 <ul>
 <li>Added some ability to customize colors and font size. Details soon...</li>
-<li>Added ability to add border to calendar. Details soon...</li>
+<li>Added ability to add border to calendar.</li>
 <li>Several buttons have been Changed.</li>
 <li>fixed some responsive issues.</li>
 <li>fixed some bugs.</li>
