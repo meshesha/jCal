@@ -23,7 +23,7 @@
 				jQueryui: false,
 				timeFormat:'12h', /*12h, 24h*/
 				monthToView: false, /*['mm','YYYY']*/
-				calBorder:'4px solid #ff3300',/*false*/
+				calBorder:false,/*'4px solid #ff3300'*/
 				calTitleBgcolor:'#dbecfc',
 				calTitleTxtcolor:'#545454',
 				calTitleFontSize:'',
