@@ -1,7 +1,7 @@
 /* 
 @author: Tadele Meshesha
-@creationDate: 06/12/2016
-@version: 1.0.0
+@creationDate: 15/12/2016
+@version: 1.1.0
 @authorEmail: meshesha1@gmail.com
 @license: GPL2
 
@@ -68,7 +68,7 @@ Toolbar
 /* Overall wrapper */
 .jcal {
 	background: #F3F3F5;
-	color:#545454;
+	 color:#545454;
 	-webkit-user-select: none;
 	-moz-user-select: none;
 	-ms-user-select: none;
@@ -81,30 +81,18 @@ Toolbar
 	position: relative;
 	text-align:center;
 	padding:10px;
-	background: #fff;
-	height: 40px;
+	/*background: #fff;*/
+	height: 30px;
 	box-sizing: border-box;
 }
 /* Center area of top bar containing title and buttons */
 .jcal-header-title {
 	font-size:.8em;
-	/*text-transform: uppercase;*/
 }
 
-/*
-.jcal-toolbar .jcal-header-title-date{
-	display: inline-block;
-	border: 0px;
-	text-decoration: none;
-	font-weight: bold;
-	font-size: 1.2em;
-	height: 25px;
-	padding: 1px 10px 0 10px;
-	transition:background .1s;
-	background: #fff;	
-}*/
 .jcal-toolbar-title-date{
-	padding: 1px 10px 0 10px;
+	padding: 1px 9px 0 9px;
+	font-size:0.5em;
 }
 /*________________________________________________*/
 .jcal-header-title{
@@ -138,15 +126,20 @@ previous button's border...
 
 	/* dimensions */
 	margin: 0;
-	height: 2.1em;
+	height: 2em;
+	width: 3.4em;
 	padding: 0 .6em;
-
+	
 	/* text & cursor */
-	font-size: 1em; /* normalize */
+	font-size: 0.5em; /* normalize */
 	white-space: nowrap;
 	cursor: pointer;
 }
-
+.jcal-header .ui-button{
+	height: 2em;
+	width: 3.5em;
+	font-size: 0.5em !important;
+}
 /* Firefox has an annoying inner border */
 .jcal-button::-moz-focus-inner { margin: 0; padding: 0; }
 	
@@ -188,7 +181,7 @@ previous button's border...
 
 .jcal-button .jcal-icon { /* non-theme */
 	position: relative;
-	top: -0.05em; /* seems to be a good adjustment across browsers */
+	/*top: -0.05em;  seems to be a good adjustment across browsers */
 	margin: 0 .2em;
 	vertical-align: middle;
 }
@@ -218,9 +211,9 @@ previous button's border...
 
 .jcal-icon {
 	display: inline-block;
-	height: 1em;
+	/*height: 1em;*/
 	line-height: 1em;
-	font-size: 0.8em;
+	/*font-size: 0.8em;*/
 	text-align: center;
 	overflow: hidden;
 	font-family: "Courier New", Courier, monospace;
@@ -250,64 +243,64 @@ NOTE: use percentage font sizes or else old IE chokes
 	content: "\02039";
 	font-weight: bold;
 	font-size: 200%;
-	top: -7%;
+	/*top: -7%;*/
 }
 
 .jcal-icon-right-single-arrow:after {
 	content: "\0203A";
 	font-weight: bold;
 	font-size: 200%;
-	top: -7%;
+	/*top: -7%;*/
 }
 
 .jcal-icon-left-double-arrow:after {
 	content: "\000AB";
 	font-size: 160%;
-	top: -7%;
+	/*top: -7%;*/
 }
 
 .jcal-icon-right-double-arrow:after {
 	content: "\000BB";
 	font-size: 160%;
-	top: -7%;
+	/*top: -7%;*/
 }
 
 .jcal-icon-left-triangle:after {
 	content: "\25C4";
 	font-size: 125%;
-	top: 3%;
+	/*top: 3%;*/
 }
 
 .jcal-icon-right-triangle:after {
 	content: "\25BA";
 	font-size: 125%;
-	top: 3%;
+	/*top: 3%;*/
 }
 
 .jcal-icon-down-triangle:after {
 	content: "\25BC";
-	font-size: 125%;
+	font-size: 80%;
 	
 }
 .jcal-icon-month:after {
 	content: "\2610";  /*266F*/
-	font-size: 125%;	
+	font-size: 80%;	
+	
 }
 .jcal-icon-list:after {
 	content: "\2261";
-	font-size: 125%;	
+	font-size: 80%;
 }
 .jcal-icon-x:after {
 	content: "\000D7";
 	font-size: 200%;
-	top: 6%;
+	/*top: 6%;*/
 }
 /* Buttons for reverting to "today", and closing event list */
 .jcal-reset{
 	cursor: pointer;
 	border: 1px solid #ccc;
 	color: #545454;
-	text-decoration: none;
 	font-size: 95%;
 	background: #eee;
 	border-top-left-radius:4px;
@@ -319,11 +312,9 @@ NOTE: use percentage font sizes or else old IE chokes
 	cursor: pointer;
 	border: 1px solid #ccc;
 	color: #545454;
-	text-decoration: none;
 	font-size: 95%;
-	box-sizing: border-box;
-	padding: 0 .6em;
 	background: #eee;
+	padding: 0 .3em;
 	border-top-left-radius:4px;
 	border-bottom-left-radius:4px;	
 	border-top-right-radius:4px;
@@ -380,7 +371,7 @@ NOTE: use percentage font sizes or else old IE chokes
 	display:table;
 	table-layout:fixed;
 	width:100%;
-	background: #fff;
+	/*background: #fff;*/
 	border-bottom: 1px solid #EBEBEB;
 }
 .jcal-day-title-wrap div {
@@ -390,7 +381,7 @@ NOTE: use percentage font sizes or else old IE chokes
 	position: relative;
 	/*font-weight: bold;*/
 	text-align:center;
-	text-transform: uppercase;
+	/*text-transform: uppercase;*/
 	font-size:70%;
 }
 
@@ -475,15 +466,10 @@ NOTE: use percentage font sizes or else old IE chokes
 }
 .jcal-more-events{
 	color: #3385ff;
-	/*background: #FFF;*/
 	border-radius: 20px;
 	top: 1px;
 	left: 1px;
 	font-size: 8px;
-	/*width: 18px;
-	height: 18px;
-	line-height: 18px;
-	text-align: center;	*/
 }
 /* Event indicator dots */
 .jcal-day .jcal-event-indicator {
@@ -508,10 +494,10 @@ NOTE: use percentage font sizes or else old IE chokes
 }
 /* Listing of events under calendar */
 .jcal-event-list {
-	background: #fff; /*rgba(233, 235, 236, 0.9);*/
+	background: #fff; 
 	overflow: auto;
 	position: absolute;
-	top: 42px;
+	top: 30px;
 	width: 100%;
 	height: calc(100% - 42px);
 	display: none;
@@ -626,6 +612,49 @@ NOTE: use percentage font sizes or else old IE chokes
 }
 /* Styles for large mode where text is revealed within events */
 @media (min-width: 600px) {
+	.jcal-header {
+		height: 40px;
+	}	
+	.jcal-button {
+		/* force height to include the border and padding */
+		-moz-box-sizing: border-box;
+		-webkit-box-sizing: border-box;
+		box-sizing: border-box;
+
+		/* dimensions */
+		margin: 0;
+		height: 2.1em;
+		width: 4em !important;
+		padding: 0 .6em;
+
+		/* text & cursor */
+		font-size: 1em; /* normalize */
+		white-space: nowrap;
+		cursor: pointer;
+	}	
+	.jcal-header .ui-button{
+		height: 2.1em !important;
+		width: 4em !important;
+		font-size: 1em !important; /* normalize */
+	}
+	.jcal-list-month{
+		padding: 0 .6em;
+	}	
+	.jcal-icon-down-triangle:after {
+		content: "\25BC";
+		font-size: 125%;
+	}
+	.jcal-icon-month:after {
+		content: "\2610"; 
+		font-size: 125%;
+	}
+	.jcal-icon-list:after {
+		content: "\2261";
+		font-size: 125%;	
+	}	
+	.jcal-toolbar-title-date{
+		font-size:1.3em;
+	}	
 	.jcal-day-event {
 		padding-top: 20px;
 	}
@@ -636,6 +665,9 @@ NOTE: use percentage font sizes or else old IE chokes
 		width:auto;
 		max-width: none;
 	}
+	.jcal-event-list {
+		top: 41px;
+	}	
 	.jcal-indicator-wrap {
 		padding:0;
 	}
