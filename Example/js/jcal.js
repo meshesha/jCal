@@ -1,7 +1,7 @@
 /*
 @author: Tadele Meshesha
-@creationDate: 06/12/2016
-@version: 1.0.1
+@creationDate: 15/12/2016
+@version: 1.1.0
 @authorEmail: meshesha1@gmail.com
 @license: GPL2
 */ 
@@ -22,7 +22,22 @@
 				buttons: false,
 				jQueryui: false,
 				timeFormat:'12h', /*12h, 24h*/
-				monthToView: false /*['mm','YYYY']*/
+				monthToView: false, /*['mm','YYYY']*/
+				calBorder:'4px solid #ff3300',/*false*/
+				calTitleBgcolor:'#dbecfc',
+				calTitleTxtcolor:'#545454',
+				calTitleFontSize:'',
+				weekdaysBgcolor:'#3588fc',
+				weekdaysTxtcolor:'#ffffff',
+				weekdaysFontSize:'',
+				daysBgcolor:'#ffffff',
+				daysTxtcolor:'#3588fc',
+				daysFontSize:'',
+				shabatDaysBgcolor:'#e3edff',
+				shabatDaysTxtcolor:'#0828fc',
+				shabatDaysFontSize:'',
+				blankDaysBgcolor:'#dbdbdb'
+				
 			}
 			var options = $.extend(defaults, options), d;
 			if(options.caldate != false){
@@ -30,7 +45,6 @@
 			}else{
 				d = new Date();
 			}
-			//alert(d);
 			var divId = $(this).attr('id'),
 				elmWidth = $('#'+divId).width(),
 				isRtl = (options.lang=='en')?'ltr':'rtl',
@@ -114,23 +128,29 @@
 			if (options.setWidth != false){
 				$('#'+divId).css('width',options.setWidth);
 			}
-			/////////////////////////////////////			
-			//set week days namse for title
-			if(options.lang=='en'){
-				if (Number(elmWidth)<217){
-					dayNames = shortDayNames;
-				}else if(Number(elmWidth)>217 && Number(elmWidth)< 470){
-					dayNames = dayNames_en;
-				}else{
-					dayNames = fulldayNames_en;
-				}
-			}else if(options.lang=='he'){
-				if (Number(elmWidth)<217){
-					dayNames = dayNames_he
-				}else{
-					dayNames = fullDayNames_he;
+			
+			if (options.calBorder != false){
+				$('#'+divId).css('border',options.calBorder);
+			}			
+			//set week days namse type for title
+			function setDaysNames(){
+				if(options.lang=='en'){
+					if (Number(elmWidth)<217){
+						dayNames = shortDayNames;
+					}else if(Number(elmWidth)>=217 && Number(elmWidth)<= 470){
+						dayNames = dayNames_en;
+					}else{
+						dayNames = fulldayNames_en;
+					}
+				}else if(options.lang=='he'){
+					if (Number(elmWidth)<217){
+						dayNames = dayNames_he
+					}else{
+						dayNames = fullDayNames_he;
+					}
 				}
 			}
+			setDaysNames();
 			// Add Day Of Week Titles
 			$('#' + divId).append('<div class="jcal-day-title-wrap" id="jcal-day-title-wrap_'+id_suffix+'" dir="'+isRtl+'"><div>'+dayNames[0]+'</div><div>'+dayNames[1]+'</div><div>'+dayNames[2]+'</div><div>'+dayNames[3]+'</div><div>'+dayNames[4]+'</div><div>'+dayNames[5]+'</div><div>'+dayNames[6]+'</div></div><div class="jcal-day-wrap" dir="'+isRtl+'"></div>');
 
@@ -144,7 +164,7 @@
 													'</div>'+
 													'<div class="jcal-center">'+
 														'<div class="jcal-toolbar-title-date" id="jcal-toolbar-title-date_'+id_suffix+'"></div>'+
-														'<span class="jcal-list-month jcal-icon-list" id="jcal-reset_'+id_suffix+'" title="List view"></span>'+
+														'<span class="jcal-list-month jcal-icon-list"  title="List view"></span>'+
 													'</div>'+
 													'<div class="jcal-right">'+
 														'<span class="jcal-next jcal-icon jcal-icon-right-single-arrow" title="Next month"></span>'+
@@ -159,7 +179,7 @@
 													'</div>'+
 													'<div class="jcal-center">'+
 														'<div class="jcal-toolbar-title-date" id="jcal-toolbar-title-date_'+id_suffix+'"></div>'+
-														'<span class="jcal-list-month jcal-icon-list" id="jcal-reset_'+id_suffix+'" title="תצוגת רשימה"></span>'+
+														'<span class=" jcal-list-month jcal-icon-list" title="תצוגת רשימה"></span>'+
 													'</div>'+
 													'<div class="jcal-right">'+
 														'<span class="jcal-prev jcal-icon jcal-icon-right-single-arrow" title="חודש קודם"></span>'+
@@ -172,20 +192,15 @@
 					$('#' + divId).prepend('<div class="jcal-header" id="jcal-header_'+id_suffix+'">'+
 												'<div class="jcal-toolbar">'+
 													'<div class="jcal-left">'+ 
-														'<button class="jcal-button jcal-corner-left jcal-button-left" title="Previous month">'+
-															'<span class="jcal-icon jcal-icon-left-single-arrow"></span>'+
-														'</button>'+
+														'<button class="jcal-button jcal-corner-left jcal-button-left jcal-icon jcal-icon-left-single-arrow" title="Previous month"></button>'+
 														'<button class="jcal-today-button jcal-button jcal-state-default jcal-corner-left jcal-corner-right jcal-state-disabled" disabled="disabled">today</button>'+
 													'</div>'+
 													'<div class="jcal-center">'+
 														'<div class="jcal-toolbar-title-date" id="jcal-toolbar-title-date_'+id_suffix+'"></div>'+
-														'<button class="jcal-month-button jcal-button jcal-state-default jcal-corner-left jcal-state-disabled">month</button>'+
-														'<button class="jcal-list-button jcal-button  jcal-corner-right">list</button>'+
+														'<button class="jcal-month-list-button jcal-button jcal-corner-left jcal-corner-right">List</button>'+
 													'</div>'+
 													'<div class="jcal-right">'+
-														'<button class="jcal-button jcal-corner-right jcal-button-right" title="Next month">'+
-															'<span class="jcal-icon jcal-icon-right-single-arrow"></span>'+
-														'</button>'+
+														'<button class="jcal-button jcal-corner-right jcal-button-right jcal-icon jcal-icon-right-single-arrow" title="Next month"></button>'+
 													'</div>'+
 												'</div>'+
 											'</div>').append('<div class="jcal-event-list" id="jcal-event-list_'+id_suffix+'"></div>');
@@ -193,20 +208,15 @@
 					$('#' + divId).prepend('<div class="jcal-header" id="jcal-header_'+id_suffix+'">'+
 												'<div class="jcal-toolbar">'+
 													'<div class="jcal-left">'+
-														'<button class="jcal-button jcal-corner-left jcal-button-right" title="חודש הבא">'+
-															'<span class="jcal-icon jcal-icon-left-single-arrow"></span>'+
-														'</button>'+
-														'<button class="jcal-today-button jcal-button jcal-state-default jcal-corner-left jcal-corner-right jcal-state-disabled" disabled="disabled">today</button>'+
+														'<button class="jcal-button jcal-corner-left jcal-button-right jcal-icon jcal-icon-left-single-arrow" title="חודש הבא"></button>'+
+														'<button class="jcal-today-button jcal-button jcal-state-default jcal-corner-left jcal-corner-right jcal-state-disabled" disabled="disabled">היום</button>'+
 													'</div>'+
 													'<div class="jcal-center">'+
 														'<div class="jcal-toolbar-title-date" id="jcal-toolbar-title-date_'+id_suffix+'"></div>'+
-														'<button class="jcal-month-button jcal-button jcal-state-default jcal-corner-left jcal-state-disabled">חודש</button>'+
-														'<button class="jcal-list-button jcal-button  jcal-corner-right">רשימה</button>'+
+														'<button class="jcal-month-list-button jcal-button jcal-corner-left jcal-corner-right">רשימה</button>'+
 													'</div>'+
 													'<div class="jcal-right">'+
-														'<button class="jcal-button jcal-corner-right jcal-button-left" title="חודש קודם">'+
-															'<span class="jcal-icon jcal-icon-right-single-arrow"></span>'+
-														'</button>'+
+														'<button class="jcal-button jcal-corner-right jcal-button-left jcal-icon jcal-icon-right-single-arrow" title="חודש קודם"></button>'+
 													'</div>'+
 												'</div>'+
 											'</div>').append('<div class="jcal-event-list" id="jcal-event-list_'+id_suffix+'" dir="rtl"></div>');
@@ -250,6 +260,7 @@
 						}
 					}
 				}
+				setDaysNames();
 				if (m == currentMonth && y == currentYear){
 					$('#'+divId+' .jcal-reset').remove();
 					$('#'+divId+' .jcal-today-button').addClass('jcal-state-default jcal-state-disabled').attr('disabled','disabled');
@@ -332,11 +343,11 @@
 							if(options.lang=='en'){
 								$('#' + divId + ' .jcal-toolbar').html('<div class="jcal-left">'+
 																			'<span class="jcal-prev jcal-icon jcal-icon-left-single-arrow"></span>'+
-																			'<span class="jcal-reset jcal-icon-down-triangle" id="jcal-reset_'+id_suffix+'" title="Set to today"></span>'+
+																			'<span class="jcal-reset jcal-spcl-icon jcal-icon-down-triangle" id="jcal-reset_'+id_suffix+'" title="Set to today"></span>'+
 																		'</div>'+
 																		'<div class="jcal-center">'+
 																			'<div class="jcal-toolbar-title-date" id="jcal-toolbar-title-date_'+id_suffix+'">'+monthNames[m - 1] +' '+ y +'</div>'+
-																			'<span class="jcal-list-month" id="jcal-reset_'+id_suffix+'" title=""></span>'+
+																			'<span class="jcal-list-month " id="jcal-reset_'+id_suffix+'" title=""></span>'+
 																		'</div>'+
 																		'<div class="jcal-right">'+
 																			'<span class="jcal-next jcal-icon jcal-icon-right-single-arrow"></span>'+
@@ -367,51 +378,37 @@
 						}else{
 							if(options.lang=='en'){
 								$('#' + divId + ' .jcal-toolbar').html('<div class="jcal-left">'+
-																			'<button class="jcal-button jcal-corner-left jcal-button-left" title="Previous month">'+
-																				'<span class="jcal-icon jcal-icon-left-single-arrow"></span>'+
-																			'</button>'+
+																			'<button class="jcal-button jcal-corner-left jcal-button-left jcal-icon jcal-icon-left-single-arrow" title="Previous month"></button>'+
 																			'<button class="jcal-today-button jcal-button jcal-corner-left jcal-corner-righ">today</button>'+
 																		'</div>'+
 																		'<div class="jcal-center">'+
 																			'<div class="jcal-toolbar-title-date" id="jcal-toolbar-title-date_'+id_suffix+'">'+monthNames[m - 1] +' '+ y +'</div>'+
-																			'<button class="jcal-month-button jcal-button jcal-corner-left">month</button>'+
-																			'<button class="jcal-list-button jcal-button  jcal-corner-right">list</button>'+
+																			'<button class="jcal-month-list-button jcal-button jcal-corner-left jcal-corner-right"/>'+
 																		'</div>'+
 																		'<div class="jcal-right">'+
-																			'<button class="jcal-button jcal-corner-right jcal-button-right" title="Next month">'+
-																				'<span class="jcal-icon jcal-icon-right-single-arrow"></span>'+
-																			'</button>'+
+																			'<button class="jcal-button jcal-corner-right jcal-button-right jcal-icon jcal-icon-right-single-arrow" title="Next month"></button>'+
 																		'</div>');
 								if(viewMode == 'monthMode'){
-									$('#'+divId+' .jcal-month-button').addClass('jcal-state-default jcal-state-disabled').attr('disabled','disabled');
-									$('#'+divId+' .jcal-list-button').removeClass('jcal-state-default jcal-state-disabled').removeAttr('disabled');									
+									$('#'+divId+' .jcal-month-list-button').html('List');
 								}else{ //listMode
-									$('#'+divId+' .jcal-list-button').addClass('jcal-state-default jcal-state-disabled').attr('disabled','disabled');
-									$('#'+divId+' .jcal-month-button').removeClass('jcal-state-default jcal-state-disabled').removeAttr('disabled');									
+									$('#'+divId+' .jcal-month-list-button').html('Month');
 								}
 							}else if(options.lang=='he'){
 								$('#' + divId + ' .jcal-toolbar').html('<div class="jcal-left">'+
-																			'<button class="jcal-button jcal-corner-left jcal-button-right" title="חודש הבא">'+
-																				'<span class="jcal-icon jcal-icon-left-single-arrow"></span>'+
-																			'</button>'+
+																			'<button class="jcal-button jcal-corner-left jcal-button-right jcal-icon jcal-icon-left-single-arrow" title="חודש הבא"></button>'+
 																			'<button class="jcal-today-button jcal-button jcal-corner-left jcal-corner-righ ">היום</button>'+
 																		'</div>'+
 																		'<div class="jcal-center">'+
 																			'<div class="jcal-toolbar-title-date" id="jcal-toolbar-title-date_'+id_suffix+'">'+monthNames[m - 1] +' '+ y +'</div>'+
-																			'<button class="jcal-month-button jcal-button jcal-state-default jcal-corner-left jcal-state-disabled">חודש</button>'+
-																			'<button class="jcal-list-button jcal-button  jcal-corner-right">רשימה</button>'+
+																			'<button class="jcal-month-list-button jcal-button jcal-corner-left jcal-corner-right"/>'+
 																		'</div>'+
 																		'<div class="jcal-right">'+
-																			'<button class="jcal-button jcal-corner-right jcal-button-left" title="חודש קודם">'+
-																				'<span class="jcal-icon jcal-icon-right-single-arrow"></span>'+
-																			'</button>'+
+																			'<button class="jcal-button jcal-corner-right jcal-button-left jcal-icon jcal-icon-right-single-arrow" title="חודש קודם"></button>'+
 																		'</div>');
 								if(viewMode == 'monthMode'){
-									$('#'+divId+' .jcal-month-button').addClass('jcal-state-default jcal-state-disabled').attr('disabled','disabled');
-									$('#'+divId+' .jcal-list-button').removeClass('jcal-state-default jcal-state-disabled').removeAttr('disabled');									
+									$('#'+divId+' .jcal-month-list-button').html('רשימה');
 								}else{ //listMode
-									$('#'+divId+' .jcal-list-button').addClass('jcal-state-default jcal-state-disabled').attr('disabled','disabled');
-									$('#'+divId+' .jcal-month-button').removeClass('jcal-state-default jcal-state-disabled').removeAttr('disabled');									
+									$('#'+divId+' .jcal-month-list-button').html('חודש');
 								}																	
 							}							
 						}
@@ -459,53 +456,39 @@
 							if(options.lang=='en'){
 								enMonth = getJewishMonthName(m,y,'en');
 								$('#' + divId + ' .jcal-toolbar').html('<div class="jcal-left">'+
-																			'<button class="jcal-button jcal-corner-left jcal-button-left" title="Previous month">'+
-																				'<span class="jcal-icon jcal-icon-left-single-arrow"></span>'+
-																			'</button>'+
+																			'<button class="jcal-button jcal-corner-left jcal-button-left jcal-icon jcal-icon-left-single-arrow" title="Previous month"></button>'+
 																			'<button class="jcal-today-button jcal-button jcal-corner-left jcal-corner-righ ">today</button>'+
 																		'</div>'+
 																		'<div class="jcal-center">'+
 																			'<div class="jcal-toolbar-title-date" id="jcal-toolbar-title-date_'+id_suffix+'">'+enMonth +' '+ y +'</div>'+
-																			'<button class="jcal-month-button jcal-button jcal-corner-left">month</button>'+
-																			'<button class="jcal-list-button jcal-button  jcal-corner-right">list</button>'+
+																			'<button class="jcal-month-list-button jcal-button jcal-corner-left jcal-corner-right"/>'+
 																		'</div>'+																		
 																		'<div class="jcal-right">'+
-																			'<button class="jcal-button jcal-corner-right jcal-button-right" title="Next month">'+
-																				'<span class="jcal-icon jcal-icon-right-single-arrow"></span>'+
-																			'</button>'+
+																			'<button class="jcal-button jcal-corner-right jcal-button-right jcal-icon jcal-icon-right-single-arrow" title="Next month"></button>'+
 																		'</div>');
 								if(viewMode == 'monthMode'){
-									$('#'+divId+' .jcal-month-button').addClass('jcal-state-default jcal-state-disabled').attr('disabled','disabled');
-									$('#'+divId+' .jcal-list-button').removeClass('jcal-state-default jcal-state-disabled').removeAttr('disabled');									
+									$('#'+divId+' .jcal-month-list-button').html('List');
 								}else{ //listMode
-									$('#'+divId+' .jcal-list-button').addClass('jcal-state-default jcal-state-disabled').attr('disabled','disabled');
-									$('#'+divId+' .jcal-month-button').removeClass('jcal-state-default jcal-state-disabled').removeAttr('disabled');									
+									$('#'+divId+' .jcal-month-list-button').html('Month');
 								}																		
 							}else if(options.lang=='he'){
 								jYear = latin2hebrew.format(y);
 								jMonth = getJewishMonthName(m,y,'he');					
 								$('#' + divId + ' .jcal-toolbar').html('<div class="jcal-left">'+
-																			'<button class="jcal-button jcal-corner-left jcal-button-right" title="חודש הבא">'+
-																				'<span class="jcal-icon jcal-icon-left-single-arrow"></span>'+
-																			'</button>'+
+																			'<button class="jcal-button jcal-corner-left jcal-button-right jcal-icon jcal-icon-left-single-arrow" title="חודש הבא"></button>'+
 																			'<button class="jcal-today-button jcal-button jcal-corner-left jcal-corner-righ ">היום</button>'+
 																		'</div>'+
 																		'<div class="jcal-center">'+
 																			'<div class="jcal-toolbar-title-date" id="jcal-toolbar-title-date_'+id_suffix+'">'+jMonth +' ה'+ jYear +'</div>'+
-																			'<button class="jcal-month-button jcal-button jcal-corner-left">month</button>'+
-																			'<button class="jcal-list-button jcal-button  jcal-corner-right">list</button>'+
+																			'<button class="jcal-month-list-button jcal-button jcal-corner-left jcal-corner-right"/>'+
 																		'</div>'+																			
 																		'<div class="jcal-right">'+
-																			'<button class="jcal-button jcal-corner-right jcal-button-left" title="חודש קודם">'+
-																				'<span class="jcal-icon jcal-icon-right-single-arrow"></span>'+
-																			'</button>'+
+																			'<button class="jcal-button jcal-corner-right jcal-button-left jcal-icon jcal-icon-right-single-arrow" title="חודש קודם"></button>'+
 																		'</div>');
 								if(viewMode == 'monthMode'){
-									$('#'+divId+' .jcal-month-button').addClass('jcal-state-default jcal-state-disabled').attr('disabled','disabled');
-									$('#'+divId+' .jcal-list-button').removeClass('jcal-state-default jcal-state-disabled').removeAttr('disabled');									
+									$('#'+divId+' .jcal-month-list-button').html('רשימה');
 								}else{ //listMode
-									$('#'+divId+' .jcal-list-button').addClass('jcal-state-default jcal-state-disabled').attr('disabled','disabled');
-									$('#'+divId+' .jcal-month-button').removeClass('jcal-state-default jcal-state-disabled').removeAttr('disabled');									
+									$('#'+divId+' .jcal-month-list-button').html('חודש');
 								}																		
 							}
 							
@@ -923,19 +906,13 @@
 					}
 					$('#'+divId+' .jcal-today-button').addClass('ui-button ui-corner-right ui-corner-left');
 					$('#'+divId+' .jcal-reset').addClass('ui-widget-header ui-corner-right ui-corner-left');
+					$('#'+divId+' .jcal-reset').removeClass('jcal-spcl-icon');
 					$('#'+divId+' .jcal-list-month').addClass('ui-widget-header ui-corner-right ui-corner-left');
-					$('#'+divId+' .jcal-month-button').addClass('ui-button ui-corner-left');
-					$('#'+divId+' .jcal-list-button').addClass('ui-button ui-corner-right');
+					$('#'+divId+' .jcal-list-month').removeClass('jcal-spcl-icon');
+					$('#'+divId+' .jcal-month-list-button').addClass('ui-button ui-corner-left ui-corner-right');
 					if (m == currentMonth && y == currentYear){
 						$('#'+divId+' .jcal-today-button').addClass('ui-state-disabled');
-					}
-					if(viewMode == 'monthMode'){
-						$('#'+divId+' .jcal-month-button').addClass('ui-state-disabled');
-						$('#'+divId+' .jcal-list-button').removeClass('ui-state-disabled');									
-					}else{ //listMode
-						$('#'+divId+' .jcal-list-button').addClass('ui-state-disabled');
-						$('#'+divId+' .jcal-month-button').removeClass('ui-state-disabled');									
-					}					
+					}				
 					//content
 					$('#'+divId+' .jcal-day').addClass('ui-widget-content');
 					//$('#'+divId+' .jcal-day-blank').addClass('ui-widget-content');
@@ -1090,13 +1067,7 @@
 				}
 				$('#' + divId+'day'+day).show();
 				if(options.buttons){
-					if(!options.jQueryui){
-						$('#'+divId+' .jcal-list-button').addClass('jcal-state-default jcal-state-disabled').attr('disabled','disabled');
-						$('#'+divId+' .jcal-month-button').removeClass('jcal-state-default jcal-state-disabled').removeAttr('disabled');
-					}else{
-						$('#'+divId+' .jcal-list-button').addClass('ui-state-disabled').attr('disabled','disabled');
-						$('#'+divId+' .jcal-month-button').removeClass('ui-state-disabled').removeAttr('disabled');						
-					}
+					$('#'+divId+' .jcal-month-list-button').html(title);
 				}else{
 					$('#'+divId+' .jcal-list-month').addClass('jcal-icon-month').removeClass('jcal-icon-list').attr("title",title);
 				}
@@ -1135,10 +1106,18 @@
 				// If events, show events list
 				var dayNum = $(this).parent().parent().data('number');//jcal-day
 				var m_title;
-				if(options.lang=='en'){
-					m_title = "Month view";
-				}else if(options.lang=='he'){
-					m_title = "תצוגת חודש";
+				if(options.buttons){
+					if(options.lang=='en'){
+						m_title = "Month";
+					}else if(options.lang=='he'){
+						m_title = "חודש";
+					}					
+				}else{
+					if(options.lang=='en'){
+						m_title = "Month view";
+					}else if(options.lang=='he'){
+						m_title = "תצוגת חודש";
+					}					
 				}
 				view_day_evente(dayNum,m_title);
 				viewMode = 'listMode';
@@ -1147,32 +1126,57 @@
 				// If events, show events list
 				var dayNum = $(this).parent().data('number');//jcal-day
 				var m_title;
-				if(options.lang=='en'){
-					m_title = "Month view";
-				}else if(options.lang=='he'){
-					m_title = "תצוגת חודש";
+				if(options.buttons){
+					if(options.lang=='en'){
+						m_title = "Month";
+					}else if(options.lang=='he'){
+						m_title = "חודש";
+					}					
+				}else{
+					if(options.lang=='en'){
+						m_title = "Month view";
+					}else if(options.lang=='he'){
+						m_title = "תצוגת חודש";
+					}					
 				}
+
 				view_day_evente(dayNum,m_title);
 				viewMode = 'listMode';
 			});				
 			if(options.buttons){
-				$(document.body).on('click','#'+divId+' .jcal-list-button', function (e) { 
+				$(document.body).on('click','#'+divId+' .jcal-month-list-button', function (e) { 
 					// If events, show events list
-					viewMode = 'listMode';
-					var whichDay = $(this).parent().parent().data('number');//jcal-day
-					$('#' + divId+' .jcal-event-list').show();
-					$('#' + divId+' .jcal-event-list').css('transform');
-					$('#' + divId+' .jcal-event-list').css('transform','scale(1)');
-					$('#' + divId+' .item-has-event').show();
-
-					$('#'+divId+' .jcal-list-button').addClass('jcal-state-default jcal-state-disabled').attr('disabled','disabled');
-					$('#'+divId+' .jcal-month-button').removeClass('jcal-state-default jcal-state-disabled').removeAttr('disabled');
-
-					if(options.jQueryui){
-						$('#'+divId+' .jcal-list-button').addClass('ui-state-disabled');
-						$('#'+divId+' .jcal-month-button').removeClass('ui-state-disabled');
-					}
-								
+					if(viewMode == 'monthMode'){
+						viewMode = 'listMode';
+						var whichDay = $(this).parent().parent().data('number');//jcal-day
+						$('#' + divId+' .jcal-event-list').show();
+						$('#' + divId+' .jcal-event-list').css('transform');
+						$('#' + divId+' .jcal-event-list').css('transform','scale(1)');
+						$('#' + divId+' .item-has-event').show();
+						var text_month = "";
+						if(options.lang=='en'){
+							text_month = "Month";
+						}else if(options.lang=='he'){
+							text_month = "חודש";
+						}						
+						$('#'+divId+' .jcal-month-list-button').html(text_month);
+					}else{//listMode
+						viewMode = 'monthMode';
+						$('#' + divId+' .jcal-event-list').css('transform','scale(0)');
+						setTimeout(function(){
+							$('#' + divId+' .jcal-event-list').hide();
+						}, 250);
+						var text_list = "";
+						if(options.lang=='en'){
+							text_list = "List";
+						}else if(options.lang=='he'){
+							text_list = "רשימה";
+						}						
+						$('#'+divId+' .jcal-month-list-button').html(text_list)						
+						//show left and right buttons
+						$('#'+divId+' .jcal-right').show();
+						$('#'+divId+' .jcal-left').show();						
+					}					
 				});
 			}else{
 				$(document.body).on('click','#'+divId+' .jcal-list-month', function (e) { 
@@ -1212,24 +1216,7 @@
 					}
 				});
 			}
-			if(options.buttons){
-				$(document.body).on('click', '#'+divId+' .jcal-month-button', function (e) {	
-					viewMode = 'monthMode';
-					$('#' + divId+' .jcal-event-list').css('transform','scale(0)');
-					setTimeout(function(){
-						$('#' + divId+' .jcal-event-list').hide();
-					}, 250);
-					$('#'+divId+' .jcal-month-button').addClass('jcal-state-default jcal-state-disabled').attr('disabled','disabled');
-					$('#'+divId+' .jcal-list-button').removeClass('jcal-state-default jcal-state-disabled').removeAttr('disabled');
-					if(options.jQueryui){
-						$('#'+divId+' .jcal-list-button').removeClass('ui-state-disabled');
-						$('#'+divId+' .jcal-month-button').addClass('ui-state-disabled');
-					}
-					//show left and right buttons
-					$('#'+divId+' .jcal-right').show();
-					$('#'+divId+' .jcal-left').show();					
-				});				
-			}
+
 			// Clicking an event within the list
 			$(document.body).on('click', '#'+divId+' .listed-event', function (e) {
 				var href = $(this).attr('href');
@@ -1238,6 +1225,33 @@
 					e.preventDefault();
 				}
 			});
+			//////////////////Colors//////////////////
+			if(!options.jQueryui){
+				$('#'+divId+' .jcal-header').css({
+					'background':options.calTitleBgcolor,
+					'color':options.calTitleTxtcolor,
+					'font-size':options.calTitleFontSize
+				});											
+				$('#'+divId+' .jcal-day-title-wrap').css({
+					'background':options.weekdaysBgcolor,
+					'color':options.weekdaysTxtcolor,
+					'font-size':options.weekdaysFontSize
+				});
+				$('#'+divId+' #jcal-day_'+id_suffix).css({
+					'background':options.daysBgcolor,
+					'color':options.daysTxtcolor,
+					'font-size':options.daysFontSize
+				});
+									
+				$('#'+divId+' #jcal-day_'+id_suffix+'_isShabat').css({
+					'background':options.shabatDaysBgcolor,
+					'color':options.shabatDaysTxtcolor,
+					'font-size':options.shabatDaysFontSize
+				});
+									
+				$('#'+divId+' .jcal-day-blank').css({'background':options.blankDaysBgcolor});			
+			}
+			//////////////////////////////////////////
 			
 			function archaicNumbers(arr){
 				var arrParse = arr.slice().sort(function (a,b) {return b[1].length - a[1].length});
