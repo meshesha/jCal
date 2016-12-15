@@ -14,6 +14,8 @@
 go to <a href="https://github.com/meshesha/jCal/wiki">jcal wiki</a>.
 
 ##Changelog
+##license: GPL2
+ <a href="https://www.gnu.org/licenses/old-licenses/gpl-2.0.html">GPL2</a>
 ####v.1.1.0
 <ul>
 <li>Added some ability to customize colors and font size. Details soon...</li>
