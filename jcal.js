@@ -871,7 +871,7 @@
 						jQuery.ajax({
 							type   	: 'POST',
 							url		: options.url, 
-							data   	: m+'AND'+y,
+							data   	: {data: m+'AND'+y},
 							success	: function (d) {
 								//alert(d);
 								var obj = jQuery.parseJSON(d);//convert json strint to json object 
