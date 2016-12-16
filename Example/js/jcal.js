@@ -23,7 +23,7 @@
 				jQueryui: false,
 				timeFormat:'12h', /*12h, 24h*/
 				monthToView: false, /*['mm','YYYY']*/
-				calBorder:false,/*'4px solid #ff3300'*/
+				calBorder:false,/*4px solid #ff3300*/
 				calTitleBgcolor:'#dbecfc',
 				calTitleTxtcolor:'#545454',
 				calTitleFontSize:'',
@@ -870,8 +870,8 @@
 					}else{
 						jQuery.ajax({
 							type   	: 'POST',
-							url		: options.url, 
-							data   	: m+'AND'+y,
+							url	: options.url, 
+							data   	: {data: m+'AND'+y},
 							success	: function (d) {
 								//alert(d);
 								var obj = jQuery.parseJSON(d);//convert json strint to json object 
