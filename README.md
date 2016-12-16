@@ -6,6 +6,7 @@
 - Fully jewish and gregorian calendar.
 - Event list detail view mode.
 - Add events (xml, json format files or using ajax-php method).
+- Joomla platform support.
 - Responsive design.
 - Basic views or jQuery-ui theme.
 - and more...
