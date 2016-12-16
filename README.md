@@ -3,9 +3,9 @@
 
 ##Features
 
-- Fully jewish abd gregorian calendar.
+- Fully jewish and gregorian calendar.
 - Event list detail view mode.
-- Add events (xml, json or ajax-php).
+- Add events (xml, json format files or using ajax-php method).
 - Responsive design.
 - Basic views or jQuery-ui theme.
 - and more...
