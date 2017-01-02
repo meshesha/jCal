@@ -11,6 +11,9 @@
 - Basic views or jQuery-ui theme.
 - and more...
 
+##Demo
+See demo <a href="https://meshesha.github.io/jcal/">here</a>.
+
 ##Usage
 go to <a href="https://github.com/meshesha/jCal/wiki">jcal wiki</a>.
 
