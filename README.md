@@ -12,7 +12,7 @@
 - and more...
 
 ##Demo
-See demo <a href="https://meshesha.github.io/jcal/">here</a>.
+See demo <a href="https://meshesha.github.io/jcal/" target="_blank">here</a>.
 
 ##Usage
 go to <a href="https://github.com/meshesha/jCal/wiki">jcal wiki</a>.
